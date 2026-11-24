@@ -1,0 +1,71 @@
+{
+  "title": "Tarefas",
+  "createTask": "Criar Tarefa",
+  "editTask": "Editar Tarefa",
+  "subtitle": {
+    "empty": "Nenhuma tarefa ainda.",
+    "showing_one": "Exibindo {{shown}} de {{total}} tarefa",
+    "showing_other": "Exibindo {{shown}} de {{total}} tarefas",
+    "default": "Gerencie suas tarefas em memória via tRPC."
+  },
+  "empty": {
+    "title": "Nenhuma tarefa encontrada",
+    "description": "Crie sua primeira tarefa para começar a organizar seu trabalho."
+  },
+  "list": {
+    "loading": "Carregando tarefas...",
+    "loadingMore": "Carregando mais tarefas...",
+    "loadMore": "Carregar mais tarefas",
+    "tryAgain": "Tentar novamente",
+    "allLoaded_one": "{{count}} tarefa carregada.",
+    "allLoaded_other": "Todas as {{count}} tarefas carregadas.",
+    "createdAt": "Criada em {{date}} UTC",
+    "deleteAriaLabel": "Excluir tarefa \"{{title}}\""
+  },
+  "form": {
+    "createSubtitle": "Adicione uma nova tarefa à lista.",
+    "editSubtitle": "Atualize o título ou a descrição da tarefa abaixo.",
+    "fields": {
+      "titleLabel": "Título",
+      "titlePlaceholder": "ex.: Preparar checklist de lançamento",
+      "descriptionLabel": "Descrição",
+      "descriptionPlaceholder": "Notas opcionais, critérios de aceite ou contexto...",
+      "descriptionHelper": "Opcional. Deixe em branco se o título for suficiente."
+    },
+    "validation": {
+      "titleRequired": "O título da tarefa é obrigatório.",
+      "titleMaxLength": "O título da tarefa deve ter no máximo {{max}} caracteres.",
+      "descriptionMaxLength": "A descrição deve ter no máximo {{max}} caracteres.",
+      "fixHighlightedFields": "Corrija os campos destacados.",
+      "checkInput": "Verifique os dados informados e tente novamente."
+    }
+  },
+  "toasts": {
+    "created": "Tarefa criada com sucesso.",
+    "updated": "Tarefa atualizada com sucesso.",
+    "deleted": "Tarefa excluída com sucesso."
+  },
+  "errors": {
+    "loadListTitle": "Falha ao carregar tarefas",
+    "loadListMessage": "Ocorreu um erro inesperado ao buscar as tarefas.",
+    "refreshListTitle": "Não foi possível atualizar as tarefas",
+    "refreshListMessage": "Falha ao atualizar as tarefas.",
+    "loadMoreTitle": "Falha ao carregar mais tarefas",
+    "loadMoreMessage": "Tente carregar a próxima página novamente.",
+    "deleteTitle": "Não foi possível excluir a tarefa",
+    "deleteFallback": "Falha ao excluir a tarefa. Tente novamente.",
+    "saveTitle": "Não foi possível salvar a tarefa",
+    "createFallback": "Falha ao criar a tarefa.",
+    "updateFallback": "Falha ao atualizar a tarefa.",
+    "loadingTask": "Carregando tarefa...",
+    "notFoundTitle": "Tarefa não encontrada",
+    "notFoundMessage": "Esta tarefa não existe ou já pode ter sido excluída.",
+    "loadTaskTitle": "Falha ao carregar a tarefa",
+    "loadTaskFallback": "Não foi possível obter os detalhes da tarefa.",
+    "invalidId": "Identificador de tarefa inválido.",
+    "deletedElsewhereTitle": "A tarefa não existe mais",
+    "deletedElsewhereMessage": "Esta tarefa foi excluída em outro lugar. Seu rascunho ainda está visível abaixo, mas salvar irá falhar.",
+    "backgroundRefreshTitle": "Falha ao atualizar em segundo plano",
+    "backgroundRefreshMessage": "Exibindo seu rascunho atual. Não foi possível atualizar os detalhes mais recentes da tarefa."
+  }
+}

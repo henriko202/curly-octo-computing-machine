@@ -1,0 +1,71 @@
+{
+  "title": "Tasks",
+  "createTask": "Create Task",
+  "editTask": "Edit Task",
+  "subtitle": {
+    "empty": "No tasks yet.",
+    "showing_one": "Showing {{shown}} of {{total}} task",
+    "showing_other": "Showing {{shown}} of {{total}} tasks",
+    "default": "Manage your tasks in memory via tRPC."
+  },
+  "empty": {
+    "title": "No tasks found",
+    "description": "Create your first task to start organizing your work."
+  },
+  "list": {
+    "loading": "Loading tasks...",
+    "loadingMore": "Loading more tasks...",
+    "loadMore": "Load more tasks",
+    "tryAgain": "Try again",
+    "allLoaded_one": "All {{count}} task loaded.",
+    "allLoaded_other": "All {{count}} tasks loaded.",
+    "createdAt": "Created {{date}} UTC",
+    "deleteAriaLabel": "Delete task \"{{title}}\""
+  },
+  "form": {
+    "createSubtitle": "Add a new task to the list.",
+    "editSubtitle": "Update the task title or description below.",
+    "fields": {
+      "titleLabel": "Title",
+      "titlePlaceholder": "e.g. Prepare release checklist",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Optional notes, acceptance criteria, or context...",
+      "descriptionHelper": "Optional. Leave blank if a title is enough."
+    },
+    "validation": {
+      "titleRequired": "Task title is required.",
+      "titleMaxLength": "Task title must be at most {{max}} characters.",
+      "descriptionMaxLength": "Description must be at most {{max}} characters.",
+      "fixHighlightedFields": "Please fix the highlighted fields.",
+      "checkInput": "Please check your input and try again."
+    }
+  },
+  "toasts": {
+    "created": "Task created successfully.",
+    "updated": "Task updated successfully.",
+    "deleted": "Task deleted successfully."
+  },
+  "errors": {
+    "loadListTitle": "Failed to load tasks",
+    "loadListMessage": "An unexpected error occurred while fetching tasks.",
+    "refreshListTitle": "Could not refresh tasks",
+    "refreshListMessage": "Failed to refresh tasks.",
+    "loadMoreTitle": "Failed to load more tasks",
+    "loadMoreMessage": "Please try loading the next page again.",
+    "deleteTitle": "Could not delete task",
+    "deleteFallback": "Failed to delete task. Please try again.",
+    "saveTitle": "Could not save task",
+    "createFallback": "Failed to create task.",
+    "updateFallback": "Failed to update task.",
+    "loadingTask": "Loading task...",
+    "notFoundTitle": "Task not found",
+    "notFoundMessage": "This task does not exist or may have already been deleted.",
+    "loadTaskTitle": "Failed to load task",
+    "loadTaskFallback": "Unable to fetch task details.",
+    "invalidId": "Invalid task identifier.",
+    "deletedElsewhereTitle": "Task no longer exists",
+    "deletedElsewhereMessage": "This task was deleted elsewhere. Your draft is still visible below, but saving will fail.",
+    "backgroundRefreshTitle": "Background refresh failed",
+    "backgroundRefreshMessage": "Showing your current draft. Latest task details could not be refreshed."
+  }
+}

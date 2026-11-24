@@ -1,0 +1,35 @@
+{
+  "appName": "Gerenciador de Tarefas",
+  "appDescription": "Gerenciador de tarefas simples em memória feito com Next.js, tRPC, TanStack React Query e Tailwind CSS.",
+  "actions": {
+    "edit": "Editar",
+    "delete": "Excluir",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "retry": "Tentar novamente",
+    "dismiss": "Dispensar",
+    "saveChanges": "Salvar alterações",
+    "backToHome": "Voltar para o início",
+    "backToTasks": "Voltar para tarefas"
+  },
+  "states": {
+    "loading": "Carregando",
+    "deleting": "Excluindo...",
+    "creating": "Criando...",
+    "saving": "Salvando..."
+  },
+  "language": {
+    "label": "Idioma",
+    "en": "EN",
+    "pt": "PT",
+    "es": "ES",
+    "names": {
+      "en": "English",
+      "pt": "Português",
+      "es": "Español"
+    }
+  },
+  "notifications": {
+    "dismiss": "Fechar notificação"
+  }
+}

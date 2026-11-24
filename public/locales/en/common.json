@@ -1,0 +1,35 @@
+{
+  "appName": "Task Manager",
+  "appDescription": "Simple in-memory task manager built with Next.js, tRPC, TanStack React Query, and Tailwind CSS.",
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "retry": "Retry",
+    "dismiss": "Dismiss",
+    "saveChanges": "Save Changes",
+    "backToHome": "Back to home",
+    "backToTasks": "Back to tasks"
+  },
+  "states": {
+    "loading": "Loading",
+    "deleting": "Deleting...",
+    "creating": "Creating...",
+    "saving": "Saving..."
+  },
+  "language": {
+    "label": "Language",
+    "en": "EN",
+    "pt": "PT",
+    "es": "ES",
+    "names": {
+      "en": "English",
+      "pt": "Português",
+      "es": "Español"
+    }
+  },
+  "notifications": {
+    "dismiss": "Dismiss notification"
+  }
+}
