@@ -1,9 +1,13 @@
 import "server-only"
-import { readFile } from "node:fs/promises"
-import path from "node:path"
 import { createInstance, type Resource } from "i18next"
 import { cookies, headers } from "next/headers"
 import { cache } from "react"
+import enCommon from "../../public/locales/en/common.json"
+import enTasks from "../../public/locales/en/tasks.json"
+import esCommon from "../../public/locales/es/common.json"
+import esTasks from "../../public/locales/es/tasks.json"
+import ptCommon from "../../public/locales/pt/common.json"
+import ptTasks from "../../public/locales/pt/tasks.json"
 import {
   DEFAULT_LOCALE,
   I18N_NAMESPACES,
@@ -16,27 +20,24 @@ import {
 
 type NamespaceDictionary = Record<string, unknown>
 
-const localeCache = new Map<string, NamespaceDictionary>()
-
-async function loadNamespaceFromPublic(
-  locale: SupportedLocale,
-  namespace: I18nNamespace
-): Promise<NamespaceDictionary> {
-  const cacheKey = `${locale}:${namespace}`
-  if (process.env.NODE_ENV === "production") {
-    const cached = localeCache.get(cacheKey)
-    if (cached) return cached
+/**
+ * Static imports keep SSR locale loading compatible with both Node.js and
+ * edge runtimes like Cloudflare Workers (where `public/` is served as static
+ * assets rather than a local filesystem).
+ */
+const STATIC_LOCALE_BUNDLES: Record<SupportedLocale, Record<I18nNamespace, NamespaceDictionary>> = {
+  en: {
+    common: enCommon,
+    tasks: enTasks
+  },
+  pt: {
+    common: ptCommon,
+    tasks: ptTasks
+  },
+  es: {
+    common: esCommon,
+    tasks: esTasks
   }
-
-  const filePath = path.join(process.cwd(), "public", "locales", locale, `${namespace}.json`)
-  const raw = await readFile(filePath, "utf8")
-  const parsed = JSON.parse(raw) as NamespaceDictionary
-
-  if (process.env.NODE_ENV === "production") {
-    localeCache.set(cacheKey, parsed)
-  }
-
-  return parsed
 }
 
 /**
@@ -55,20 +56,16 @@ export const getServerLocale = cache(async (): Promise<SupportedLocale> => {
 })
 
 /**
- * Loads the locale JSON files from `public/locales/<locale>/<ns>.json` on the server
- * so the initial SSR HTML and browser hydration match with zero loading flash.
+ * Returns the locale dictionaries for the active locale (plus English fallback)
+ * so initial SSR HTML and browser hydration match with zero loading flash.
  */
 export const getServerResources = cache(async (locale: SupportedLocale): Promise<Resource> => {
   const localesToLoad: SupportedLocale[] = locale === DEFAULT_LOCALE ? [DEFAULT_LOCALE] : [locale, DEFAULT_LOCALE]
 
   const resources: Resource = {}
-
-  await Promise.all(
-    localesToLoad.map(async lng => {
-      const entries = await Promise.all(I18N_NAMESPACES.map(async ns => [ns, await loadNamespaceFromPublic(lng, ns)]))
-      resources[lng] = Object.fromEntries(entries)
-    })
-  )
+  for (const lng of localesToLoad) {
+    resources[lng] = STATIC_LOCALE_BUNDLES[lng]
+  }
 
   return resources
 })

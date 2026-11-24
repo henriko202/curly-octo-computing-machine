@@ -3,8 +3,10 @@ node_modules/
 .pnp
 .pnp.*
 
-# Next.js
+# Next.js & Cloudflare OpenNext
 .next/
+.open-next/
+.wrangler/
 out/
 next-env.d.ts
 

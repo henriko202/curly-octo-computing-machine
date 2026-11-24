@@ -1,3 +1,7 @@
+nodeLinker: hoisted
+allowBuilds:
+  esbuild: true
+  workerd: true
 minimumReleaseAgeExclude:
   - "@tanstack/query-core@5.108.4"
   - "@tanstack/react-query@5.108.4"
@@ -6,3 +10,6 @@ minimumReleaseAgeExclude:
   - "@trpc/tanstack-react-query@11.31.1"
   - lucide-react@1.79.0
   - i18next@27.2.7
+  - "@cloudflare/workers-utils@0.57.0"
+  - miniflare@5.20261123.1-beta
+  - wrangler@4.168.0

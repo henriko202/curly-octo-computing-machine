@@ -21,7 +21,7 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Stack used
 
 | Layer              | Used                                                                    | Why                                                                         |
-|--------------------|-------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| ------------------ | ----------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | Framework          | Next.js 16 (App Router) + React 19                                      | Dynamic SSR for `/` and `/tasks/[id]/edit`, thin route wrappers             |
 | API                | tRPC v11 (`@trpc/server`, `@trpc/client`, `@trpc/tanstack-react-query`) | End-to-end TypeScript safety without codegen or manual REST clients         |
 | Server State       | TanStack React Query v5                                                 | SSR hydration, infinite scroll caching, hover prefetching, invalidation     |
@@ -86,7 +86,7 @@ src/
 ### "Where do I go to change X?"
 
 | If you want to change...                        | Look here                                                      |
-|-------------------------------------------------|----------------------------------------------------------------|
+| ----------------------------------------------- | -------------------------------------------------------------- |
 | Task CRUD logic or in-memory storage            | `src/server/routers/task.ts`, `src/server/store/task-store.ts` |
 | Title/description validation rules or page size | `src/types/task.ts` (shared by backend and frontend)           |
 | Task list UI, delete flow, or create/edit form  | `src/components/TaskList/`                                     |
@@ -99,7 +99,7 @@ src/
 ## tRPC API (`taskRouter`)
 
 | Procedure      | Type     | Input                                   | Behavior                                                                                                                    |
-|----------------|----------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| -------------- | -------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `task.list`    | Query    | `{ limit?: 1..50, cursor?: "seq:<n>" }` | Returns `{ items, nextCursor, totalCount }` newest-first (default `limit: 5`). Malformed cursors return `BAD_REQUEST`.      |
 | `task.getById` | Query    | `{ id }`                                | Returns one `Task` or throws `NOT_FOUND`.                                                                                   |
 | `task.create`  | Mutation | `{ title, description? }`               | Trims fields, generates UUID + `createdAt`, prepends to store. Rejects empty title (`BAD_REQUEST`).                         |
@@ -121,16 +121,16 @@ src/
 4. **Concurrent-safe deletes & draft preservation.** Deletes use `mutateAsync` with per-ID `try/catch/finally` so
    clicking multiple deletes quickly never strands a spinner. Editing keeps the form mounted on background refresh
    errors so unsaved drafts are never wiped.
-5. **Zero-flash i18n.** On SSR, `src/i18n/server.ts` reads JSON files directly from `public/locales/`. On language
-   switch, `LanguageSelector` fetches the new JSON via `i18next-http-backend`, writes the `NEXT_LOCALE` cookie, and
-   calls `router.refresh()` to sync server metadata.
+5. **Zero-flash i18n.** On SSR, `src/i18n/server.ts` statically imports JSON dictionaries from `public/locales/`
+   (compatible with both Node.js and Cloudflare Workers). On language switch, `LanguageSelector` fetches the new JSON
+   via `i18next-http-backend`, writes the `NEXT_LOCALE` cookie, and calls `router.refresh()` to sync server metadata.
 
 ---
 
 ## Scripts
 
 | Command             | What it does                                                          |
-|---------------------|-----------------------------------------------------------------------|
+| ------------------- | --------------------------------------------------------------------- |
 | `pnpm dev`          | Run Next.js dev server                                                |
 | `pnpm build`        | Build production bundle                                               |
 | `pnpm start`        | Run production server                                                 |
@@ -139,3 +139,19 @@ src/
 | `pnpm lint`         | Run ESLint (`eslint-config-next` + `eslint-config-prettier`)          |
 | `pnpm format`       | Format the codebase with Prettier + Tailwind class sorting            |
 | `pnpm format:check` | Check Prettier formatting without editing files                       |
+| `pnpm cf:build`     | Build the Next.js bundle for Cloudflare Workers via OpenNext          |
+| `pnpm cf:preview`   | Build and preview locally on Cloudflare's `workerd` runtime           |
+| `pnpm cf:deploy`    | Build and deploy to your public `*.workers.dev` URL                   |
+
+---
+
+## Deploying to Cloudflare Workers (`*.workers.dev`)
+
+```bash
+pnpm exec wrangler login
+pnpm cf:deploy
+```
+
+`wrangler.jsonc` enables `workers_dev: true`, so `pnpm cf:deploy` publishes to a public
+`https://task-manager-trpc.<your-subdomain>.workers.dev` URL. Because the store is plain in-memory, tasks live inside
+each Worker isolate and reset when an isolate restarts or traffic routes to another isolate.
